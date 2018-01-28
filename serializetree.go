@@ -45,9 +45,9 @@ func (n *node) insert(v int) error {
 	return n.right.insert(v)
 }
 
-// Marshall returns the binary search tree as json
-func (t *BinarySearchTree) Marshall() string {
-	return fmt.Sprintf("{\"head\": %s}", t.root.Marshall())
+// Marshal returns the binary search tree as json
+func (t *BinarySearchTree) Marshal() string {
+	return fmt.Sprintf("{\"head\": %s}", t.root.Marshal())
 }
 
 type node struct {
@@ -64,13 +64,13 @@ func newNode(v int) *node {
 	}
 }
 
-func (n *node) Marshall() string {
+func (n *node) Marshal() string {
 	left, right := "null", "null"
 	if n.left != nil {
-		left = n.left.Marshall()
+		left = n.left.Marshal()
 	}
 	if n.right != nil {
-		right = n.right.Marshall()
+		right = n.right.Marshal()
 	}
 	return fmt.Sprintf("{\"val\": %d, \"left\": %s, \"right\": %s}", n.value, left, right)
 }
@@ -80,5 +80,5 @@ func main() {
 	t.Insert(3)
 	t.Insert(5)
 	t.Insert(6)
-	fmt.Printf(t.Marshall())
+	fmt.Printf(t.Marshal())
 }
