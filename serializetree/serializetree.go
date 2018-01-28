@@ -1,4 +1,4 @@
-package main
+package serializetree
 
 import (
 	"errors"
@@ -47,7 +47,11 @@ func (n *node) insert(v int) error {
 
 // Marshal returns the binary search tree as json
 func (t *BinarySearchTree) Marshal() string {
-	return fmt.Sprintf("{\"head\": %s}", t.root.Marshal())
+	result := `{"head": null}`
+	if t.root != nil {
+		result = fmt.Sprintf(`{"head": %s}`, t.root.Marshal())
+	}
+	return result
 }
 
 type node struct {
@@ -72,13 +76,5 @@ func (n *node) Marshal() string {
 	if n.right != nil {
 		right = n.right.Marshal()
 	}
-	return fmt.Sprintf("{\"val\": %d, \"left\": %s, \"right\": %s}", n.value, left, right)
-}
-
-func main() {
-	t := NewTree()
-	t.Insert(3)
-	t.Insert(5)
-	t.Insert(6)
-	fmt.Printf(t.Marshal())
+	return fmt.Sprintf(`{"val": %d, "left": %s, "right": %s}`, n.value, left, right)
 }
